@@ -12,24 +12,35 @@ export function mealTemplate(data) {
   } = data;
   function getMealCardDOM() {
     const article = document.createElement("article");
+    const timeDiv = document.createElement("div");
     const img = document.createElement("img");
     const h3 = document.createElement("h3");
     const h4 = document.createElement("h4");
     const p = document.createElement("p");
     const h4Two = document.createElement("h4");
     const ulIngredients = document.createElement("ul");
-    ingredients.forEach((ingredient, quantity) => {
+    ingredients.forEach((ingredient) => {
       const liIngredient = document.createElement("li");
-      const spanIngredient = document.createElement("span");
       const spanQuantity = document.createElement("span");
-      spanIngredient.textContent = ingredient;
-      spanQuantity.textContent = quantity;
-      liIngredient.appendChild(spanIngredient);
-      liIngredient.appendChild(spanQuantity);
+
+      const ingredientText = ingredient.ingredient;
+      if (ingredient.quantity !== undefined) {
+        spanQuantity.textContent = `${ingredient.quantity} ${
+          ingredient.unit || ""
+        }`;
+      }
+
+      liIngredient.textContent = ingredientText;
+      if (spanQuantity.textContent) {
+        liIngredient.appendChild(spanQuantity);
+      }
+
       ulIngredients.appendChild(liIngredient);
     });
     const spanDuration = document.createElement("span");
-    spanDuration.textContent = time;
+    spanDuration.textContent = time + "min";
+    spanDuration.classList.add("time-span");
+    timeDiv.appendChild(spanDuration);
     img.src = `../../data/images/${image}`;
     h3.textContent = name;
     h4.textContent = "Recette";
@@ -42,7 +53,7 @@ export function mealTemplate(data) {
     article.appendChild(p);
     article.appendChild(h4Two);
     article.appendChild(ulIngredients);
-    article.appendChild(spanDuration);
+    article.appendChild(timeDiv);
     return article;
   }
   return { getMealCardDOM };

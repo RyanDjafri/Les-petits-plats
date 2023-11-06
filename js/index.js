@@ -1,17 +1,18 @@
 import { fetchData } from "./api/fetchData.js";
 import { mealTemplate } from "./template/mealTemplate.js";
 
-async function displayMeals(meals) {
-  const mealsContainer = document.getElementById("meals-container");
-  meals.forEach((meal) => {
+async function displayData(data) {
+  const mealsSection = document.querySelector("#meals-container");
+  data.forEach((meal) => {
     const mealModel = mealTemplate(meal);
-    const mealCardDOM = mealModel.getMealCardDOM();
-    mealsContainer.appendChild(mealCardDOM);
+    const userCardDOM = mealModel.getMealCardDOM();
+    mealsSection.appendChild(userCardDOM);
   });
 }
 
-async function getMeals() {
-  const { meals } = await fetchData();
-  displayMeals(meals);
+async function init() {
+  const data = await fetchData();
+  displayData(data);
 }
-getMeals();
+
+init();
