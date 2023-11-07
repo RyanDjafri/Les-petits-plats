@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="shortcut icon" href="./assets/icons/Group 3.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style/main.css">
     <title>Les petits plats</title>
@@ -24,11 +24,21 @@
     </div>
 </section>
 <section id="options">
-    <div class="filter-options">
-        <div class="options"></div>
-        <div class="recipe-quantity"></div>
-    </div>
-    <div class="selected-filters"></div>
+        <div class="options">
+            <div class="ingredients">
+                <p class="category">Ingrédients <img src="./assets/icons/Vector 1.svg" alt="chevron-icon" class="chevron"></p>
+            </div>
+            <div class="appareils">
+                <p class="category">Appareils<img src="./assets/icons/Vector 1.svg" alt="chevron-icon" class="chevron"></p>
+            </div>
+            <div class="ustensiles">
+                <p class="category">Ustensiles<img src="./assets/icons/Vector 1.svg" alt="chevron-icon" class="chevron"></p>
+            </div>
+        </div>
+        <div class="recipes-counter">
+            <span id="recipes-number"></span>
+            <p>recettes</p>
+        </div>
 </section>
 <section id="meals-container"></section>
     <script type="module" src="./js/index.js" ></script>
