@@ -54,6 +54,13 @@ border-radius: 11px;
 background: #FFF;
 display:flex;
 justify-content: space-between;
+color: #7A7A7A;
+font-family: "Manrope";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
 }
 #meal::placeholder {
     color: #7A7A7A;
@@ -63,6 +70,14 @@ justify-content: space-between;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+#meal:focus::placeholder {
+  color:  #7A7A7A;
+font-family: "Manrope";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 #meal:focus {
   padding-left:35px;
@@ -84,7 +99,7 @@ justify-content: space-between;
 }
 .cancel {
   position:absolute;
-  right:24%;
+  right:20%;
   display:none;
   width: 13px;
   height: 13px;
