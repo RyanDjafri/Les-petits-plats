@@ -99,7 +99,7 @@ line-height: normal;
 }
 .cancel {
   position:absolute;
-  right:20%;
+  right:24%;
   display:none;
   width: 13px;
   height: 13px;
@@ -141,6 +141,13 @@ line-height: normal;
 align-items: center;
 justify-content: space-between;
 }
+/* .list {
+width: 195px;
+height: 315px;
+border-radius: 11px;
+background: #FFF;
+} */
+
 #recipes-number, .recipes-counter p {
   color:  #1B1B1B;
 font-family: "Anton";
