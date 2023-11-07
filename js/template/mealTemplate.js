@@ -53,6 +53,7 @@ export function mealTemplate(data) {
     article.appendChild(p);
     article.appendChild(h4Two);
     article.appendChild(ulIngredients);
+    timeDiv.classList.add("time-div");
     article.appendChild(timeDiv);
     return article;
   }

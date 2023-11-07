@@ -95,6 +95,7 @@ background: #FFF;
     background: #FFF;
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
     margin-bottom: 2rem; 
+    position:relative;
   }
   
   article img {
@@ -155,7 +156,7 @@ flex-direction: column;
 align-items:flex-start;
   }
 article ul li span {
-    color:  #7A7A7A;
+color:  #7A7A7A;
 font-family: "Manrope";
 font-size: 14px;
 font-style: normal;
@@ -165,13 +166,6 @@ line-height: normal;
 
 
 
-article div {
-    padding: 5px 15px;
-    border-radius: 14px;
-    background: #FFD15B;
-    position:absolute;
-
-}
 
 .time-span {
 color:  #1B1B1B;
@@ -181,4 +175,13 @@ font-size: 12px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+}
+
+.time-div {
+  padding: 5px 15px;
+    border-radius: 14px;
+    background: #FFD15B;
+    position:absolute;
+    top:26px;
+    right:22px;
 }
