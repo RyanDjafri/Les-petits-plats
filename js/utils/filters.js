@@ -28,6 +28,7 @@ categories.forEach((category, index) => {
         "../../assets/icons/vector-up.svg";
       clickedList.style.display = "block";
     } else {
+      category.style.borderRadius = "11px";
       category.querySelector(".chevron").src = "./assets/icons/Vector 1.svg";
       clickedList.style.display = "none";
     }

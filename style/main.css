@@ -99,7 +99,7 @@ line-height: normal;
 }
 .cancel {
   position:absolute;
-  right:24%;
+  right:25%;
   display:none;
   width: 13px;
   height: 13px;
@@ -124,10 +124,9 @@ line-height: normal;
   gap:3rem;
 }
 .ingredients, .appareils, .ustensiles {
-padding: 17px 16px;
 width:195px;
 height:56px;
-border-radius: 11px;
+border-radius:11px;
 background: #FFF;
 color: #1B1B1B;
 font-family: "Manrope";
@@ -137,19 +136,22 @@ font-weight: 500;
 line-height: normal;
 }
 .category {
-  display:flex;
+display:flex;
 align-items: center;
 justify-content: space-between;
+padding:1rem;
 }
 .list {
   overflow: hidden;
   display:none;
+  border-radius: 0;
+  padding-left:1rem;
 }
 .list-box {
 width: 195px;
 height: 315px;
-border-radius: 11px;
 background: #FFF;
+border-radius: 0;
 }
 .list-item {
 list-style:none;
@@ -160,10 +162,12 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 }
+
 #list-input {
   width: 163px;
 height: 36px;
 border-color: #C6C6C6;
+padding-left:1.5rem;
 }
 #recipes-number, .recipes-counter p {
 color:  #1B1B1B;
