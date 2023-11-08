@@ -160,6 +160,11 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 }
+#list-input {
+  width: 163px;
+height: 36px;
+border-color: #C6C6C6;
+}
 #recipes-number, .recipes-counter p {
 color:  #1B1B1B;
 font-family: "Anton";
