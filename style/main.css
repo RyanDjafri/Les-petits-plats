@@ -141,13 +141,25 @@ line-height: normal;
 align-items: center;
 justify-content: space-between;
 }
-/* .list {
+.list {
+  overflow: hidden;
+  display:none;
+}
+.list-box {
 width: 195px;
 height: 315px;
 border-radius: 11px;
 background: #FFF;
-} */
-
+}
+.list-item {
+list-style:none;
+color:  #1B1B1B;
+font-family: "Manrope";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
 #recipes-number, .recipes-counter p {
 color:  #1B1B1B;
 font-family: "Anton";
