@@ -10,6 +10,7 @@ const lists = document.querySelectorAll(".list");
 async function getData() {
   try {
     const meals = await fetchData();
+    recipeNumber.textContent = meals.length;
     return meals;
   } catch (error) {
     console.error("Error fetching photographer data:", error);

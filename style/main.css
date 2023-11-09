@@ -167,7 +167,6 @@ line-height: normal;
   width: 163px;
 height: 36px;
 border-color: #C6C6C6;
-padding-left:1.5rem;
 }
 #recipes-number, .recipes-counter p {
 color:  #1B1B1B;
@@ -228,7 +227,7 @@ text-transform: uppercase;
   article p {
     color:  #1B1B1B;
 font-family: "Manrope";
-font-size: 14px;
+font-size: 13px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
@@ -244,7 +243,7 @@ article ul {
     margin-left:25px;
     color:  #1B1B1B;
 font-family: "Manrope";
-font-size: 14px;
+font-size: 12px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
