@@ -78,6 +78,7 @@ font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+padding:0;
 }
 #meal:focus {
   padding-left:35px;
@@ -148,6 +149,8 @@ padding:1rem;
   padding-left:1rem;
 }
 .list-box {
+  position:absolute;
+  z-index:1;
 width: 195px;
 height: 315px;
 background: #FFF;
@@ -161,12 +164,49 @@ font-size: 14px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+text-transform: capitalize;
+padding : 6px 0;
 }
-
+.div-input {
+  display:flex;
+  align-items: center;
+}
+.icons {
+  display:flex;
+  align-items: center;
+  transform:translateX(-38px);
+  gap:8px;
+}
 #list-input {
   width: 163px;
-height: 36px;
-border-color: #C6C6C6;
+  height: 36px;
+  border-color: #C6C6C6;
+  color: #7A7A7A;
+font-family: "Manrope";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.cancel-input {
+  width: 8px;
+height: 8px;
+/* display:none; */
+}
+.search-icon {
+  width: 16px;
+height: 15px;
+}
+#list-input:focus {
+  width: 163px;
+  height: 36px;
+  border-color: #C6C6C6;
+  color: #7A7A7A;
+font-family: "Manrope";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 #recipes-number, .recipes-counter p {
 color:  #1B1B1B;

@@ -6,6 +6,26 @@ const ustensilsList = document.querySelector("#list-u");
 const recipeNumber = document.getElementById("recipes-number");
 const categories = document.querySelectorAll(".category");
 const lists = document.querySelectorAll(".list");
+// const listInputs = document.querySelectorAll(".div-input input");
+// const cancels = document.querySelectorAll(".cancel-input");
+
+// listInputs.forEach((listInput, index) => {
+//   listInput.addEventListener("input", () => {
+//     const cancel = cancels[index];
+//     if (listInput.value.length > 1) {
+//       cancel.style.display = "block";
+//     } else {
+//       cancel.style.display = "none";
+//     }
+
+//     if (cancel.style.display === "block") {
+//       cancel.addEventListener("click", () => {
+//         listInput.value = "";
+//         cancel.style.display = "none";
+//       });
+//     }
+//   });
+// });
 
 async function getData() {
   try {
