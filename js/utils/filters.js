@@ -7,7 +7,6 @@ const recipeNumber = document.getElementById("recipes-number");
 const categories = document.querySelectorAll(".category");
 const lists = document.querySelectorAll(".list");
 const listInputs = document.querySelectorAll("#list-input");
-console.log(listInputs);
 
 // const cancels = document.querySelectorAll(".cancel-input");
 
@@ -74,7 +73,20 @@ async function getAllIngredients() {
     <li class="list-item">${ingredient}</li>
     `;
   }
-  // console.log(document.querySelectorAll("#list-i .list-item"));
+  const input = document.getElementById("list-input ingredients");
+  const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
+  input.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    for (let j = 0; j < ingredientsListItems.length; j++) {
+      const listItem = ingredientsListItems[j];
+      const listItemText = listItem.textContent.toLowerCase();
+      if (listItemText.includes(value)) {
+        listItem.style.display = "block";
+      } else {
+        listItem.style.display = "none";
+      }
+    }
+  });
 }
 
 async function getAllAppareils() {
@@ -91,6 +103,10 @@ async function getAllAppareils() {
     <li class="list-item">${appliance}</li>
     `;
   }
+  // const input = document.getElementById("list-input");
+  // input.addEventListener("input", (e) => {
+  //   console.log(e.target.value);
+  // });
 }
 
 async function getAllUstensils() {
@@ -109,6 +125,10 @@ async function getAllUstensils() {
     <li class="list-item">${ustensil}</li>
     `;
   }
+  // const input = document.getElementById("list-input");
+  // input.addEventListener("input", (e) => {
+  //   console.log(e.target.value);
+  // });
 }
 
 for (let i = 0; i < listInputs.length; i++) {
