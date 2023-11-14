@@ -146,7 +146,7 @@ padding:1rem;
   overflow: hidden;
   display:none;
   border-radius: 0;
-  padding-left:1rem;
+  /* padding-left:1rem; */
 }
 .list-box {
   position:absolute;
@@ -165,11 +165,16 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 text-transform: capitalize;
-padding : 6px 0;
+padding : 6px 1rem;
+}
+.list-item:hover, .list-item:focus {
+  background:  #FFD15B;
+
 }
 .div-input {
   display:flex;
   align-items: center;
+  padding: 0 1rem 1rem 1rem;
 }
 .icons {
   display:flex;
@@ -180,6 +185,7 @@ padding : 6px 0;
 #list-input {
   width: 163px;
   height: 36px;
+ 
   border-color: #C6C6C6;
   color: #7A7A7A;
 font-family: "Manrope";

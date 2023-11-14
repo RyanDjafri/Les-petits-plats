@@ -14,6 +14,7 @@ export function mealTemplate(data) {
     const article = document.createElement("article");
     const timeDiv = document.createElement("div");
     const img = document.createElement("img");
+    img.alt = `image of ${name}`;
     const h3 = document.createElement("h3");
     const h4 = document.createElement("h4");
     const p = document.createElement("p");
