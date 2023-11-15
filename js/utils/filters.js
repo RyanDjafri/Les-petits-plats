@@ -8,6 +8,7 @@ const categories = document.querySelectorAll(".category");
 const lists = document.querySelectorAll(".list");
 const listInputs = document.querySelectorAll("#list-input");
 const selectedContainer = document.querySelector(".selected-options");
+
 // const cancels = document.querySelectorAll(".cancel-input");
 
 // listInputs.forEach((listInput, index) => {
