@@ -110,7 +110,6 @@ async function getAllIngredients() {
       const closeIconItem = document.querySelector(".close-icon-item");
       closeIconItem.addEventListener("click", () => {
         const item = closeIconItem.parentNode;
-        console.log(item);
         item.remove();
         const index = selectedIngredients.indexOf(selected);
         selectedIngredients.splice(index, 1);
@@ -127,6 +126,7 @@ async function getAllAppareils() {
     }
     return acc;
   }, []);
+  const selectedAppareils = [];
   for (let i = 0; i < appliances.length; i++) {
     const appliance = appliances[i];
     appareilsList.innerHTML += `
@@ -146,6 +146,29 @@ async function getAllAppareils() {
         }
       }
     });
+    for (let k = 0; k < appareilsListItems.length; k++) {
+      appareilsListItems[k].addEventListener("click", () => {
+        const selected = appareilsListItems[k].textContent;
+        if (!selectedAppareils.includes(selected)) {
+          selectedAppareils.push(selected);
+          selectedContainer.innerHTML += `
+            <div class="selected-item">
+              <p class="selected">${selected}</p>
+              <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
+            </div>
+          `;
+        } else {
+          console.log(`${selected} is already selected.`);
+        }
+        const closeIconItem = document.querySelector(".close-icon-item");
+        closeIconItem.addEventListener("click", () => {
+          const item = closeIconItem.parentNode;
+          item.remove();
+          const index = selectedAppareils.indexOf(selected);
+          selectedAppareils.splice(index, 1);
+        });
+      });
+    }
   }
 }
 
@@ -159,10 +182,11 @@ async function getAllUstensils() {
     });
     return acc;
   }, []);
+  const selectedUstensils = [];
   for (let i = 0; i < ustensils.length; i++) {
     const ustensil = ustensils[i];
     ustensilsList.innerHTML += `
-    <li class="list-item">${ustensil}</li>
+      <li class="list-item">${ustensil}</li>
     `;
   }
   const input = document.getElementById("list-input-ustensils");
@@ -179,6 +203,30 @@ async function getAllUstensils() {
       }
     }
   });
+  for (let k = 0; k < ustensilsListItems.length; k++) {
+    ustensilsListItems[k].addEventListener("click", () => {
+      const selected = ustensilsListItems[k].textContent;
+      if (!selectedUstensils.includes(selected)) {
+        selectedUstensils.push(selected);
+        selectedContainer.innerHTML += `
+          <div class="selected-item">
+            <p class="selected">${selected}</p>
+            <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
+          </div>
+        `;
+      } else {
+        console.log(`${selected} is already selected.`);
+      }
+      const closeIconItem =
+        selectedContainer.lastElementChild.querySelector(".close-icon-item");
+      closeIconItem.addEventListener("click", () => {
+        const item = closeIconItem.parentNode;
+        item.remove();
+        const index = selectedUstensils.indexOf(selected);
+        selectedUstensils.splice(index, 1);
+      });
+    });
+  }
 }
 
 getAllIngredients();
