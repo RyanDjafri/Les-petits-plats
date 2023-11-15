@@ -7,7 +7,7 @@ const recipeNumber = document.getElementById("recipes-number");
 const categories = document.querySelectorAll(".category");
 const lists = document.querySelectorAll(".list");
 const listInputs = document.querySelectorAll("#list-input");
-
+const selectedContainer = document.querySelector(".selected-options");
 // const cancels = document.querySelectorAll(".cancel-input");
 
 // listInputs.forEach((listInput, index) => {
@@ -67,14 +67,19 @@ async function getAllIngredients() {
     });
     return acc;
   }, []);
+
+  const selectedIngredients = [];
+
   for (let i = 0; i < ingredients.length; i++) {
     const ingredient = ingredients[i];
     ingredientsList.innerHTML += `
-    <li class="list-item">${ingredient}</li>
+      <li class="list-item">${ingredient}</li>
     `;
   }
-  const input = document.getElementById("list-input ingredients");
+
+  const input = document.getElementById("list-input-ingredients");
   const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
+
   input.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase();
     for (let j = 0; j < ingredientsListItems.length; j++) {
@@ -87,6 +92,31 @@ async function getAllIngredients() {
       }
     }
   });
+
+  for (let k = 0; k < ingredientsListItems.length; k++) {
+    ingredientsListItems[k].addEventListener("click", () => {
+      const selected = ingredientsListItems[k].textContent;
+      if (!selectedIngredients.includes(selected)) {
+        selectedIngredients.push(selected);
+        selectedContainer.innerHTML += `
+          <div class="selected-item">
+            <p class="selected">${selected}</p>
+            <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
+          </div>
+        `;
+      } else {
+        console.log(`${selected} is already selected.`);
+      }
+      const closeIconItem = document.querySelector(".close-icon-item");
+      closeIconItem.addEventListener("click", () => {
+        const item = closeIconItem.parentNode;
+        console.log(item);
+        item.remove();
+        const index = selectedIngredients.indexOf(selected);
+        selectedIngredients.splice(index, 1);
+      });
+    });
+  }
 }
 
 async function getAllAppareils() {
@@ -102,11 +132,21 @@ async function getAllAppareils() {
     appareilsList.innerHTML += `
     <li class="list-item">${appliance}</li>
     `;
+    const input = document.getElementById("list-input-appareils");
+    const appareilsListItems = document.querySelectorAll("#list-a .list-item");
+    input.addEventListener("input", (e) => {
+      const value = e.target.value.toLowerCase();
+      for (let j = 0; j < appareilsListItems.length; j++) {
+        const listItem = appareilsListItems[j];
+        const listItemText = listItem.textContent.toLowerCase();
+        if (listItemText.includes(value)) {
+          listItem.style.display = "block";
+        } else {
+          listItem.style.display = "none";
+        }
+      }
+    });
   }
-  // const input = document.getElementById("list-input");
-  // input.addEventListener("input", (e) => {
-  //   console.log(e.target.value);
-  // });
 }
 
 async function getAllUstensils() {
@@ -125,43 +165,21 @@ async function getAllUstensils() {
     <li class="list-item">${ustensil}</li>
     `;
   }
-  // const input = document.getElementById("list-input");
-  // input.addEventListener("input", (e) => {
-  //   console.log(e.target.value);
-  // });
-}
-
-for (let i = 0; i < listInputs.length; i++) {
-  listInputs[i].addEventListener("input", (event) => {
-    const ingredients = listInputs[0].value.toLowerCase().split(" ");
-    const appliances = listInputs[1].value.toLowerCase().split(" ");
-    const ustensils = listInputs[2].value.toLowerCase().split(" ");
-    // filterAndUpdateLists(ingredients, appliances, ustensils);
-    console.log(event.target.value);
+  const input = document.getElementById("list-input-ustensils");
+  const ustensilsListItems = document.querySelectorAll("#list-u .list-item");
+  input.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    for (let j = 0; j < ustensilsListItems.length; j++) {
+      const listItem = ustensilsListItems[j];
+      const listItemText = listItem.textContent.toLowerCase();
+      if (listItemText.includes(value)) {
+        listItem.style.display = "block";
+      } else {
+        listItem.style.display = "none";
+      }
+    }
   });
 }
-
-// function filterAndUpdateLists(ingredients, appliances, ustensils) {
-//   const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
-
-//   for (let i = 0; i < ingredientsListItems.length; i++) {
-//     const itemName = ingredientsListItems[i].textContent.toLowerCase();
-//     let matchesIngredients = false;
-
-//     for (let j = 0; j < ingredients.length; j++) {
-//       if (itemName.includes(ingredients[j])) {
-//         matchesIngredients = true;
-//         break;
-//       }
-//     }
-
-//     if (matchesIngredients) {
-//       ingredientsListItems[i].style.display = "block";
-//     } else {
-//       ingredientsListItems[i].style.display = "none";
-//     }
-//   }
-// }
 
 getAllIngredients();
 getAllAppareils();
