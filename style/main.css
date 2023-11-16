@@ -465,7 +465,7 @@ line-height: normal;
 
 @media screen and (max-width:673px){
   #meal {
-    width: 600px;
+    width: 500px;
     height: 55px;
   }
   .section-title {
@@ -493,4 +493,122 @@ line-height: normal;
     width: 120px;
   height: 36px;
   }
+}
+
+@media screen and (max-width:610px){
+  article {
+    flex: 0 1 calc(100% - 2rem); 
+    height:800px;
+  }
+  article h3 {
+    font-size:14px;
+  }
+  article h4 {
+    font-size:14px;
+  }
+  article p {
+    font-size:12px;
+  }
+  article ul li {
+    font-size:12px;
+  }
+  article ul li span {
+    font-size:12px;
+  }
+  .time-span {
+    font-size:12px;
+  }
+}
+
+@media screen and (max-width:555px){
+  #meal {
+    width: 450px;
+    height: 50px;
+  }
+  .section-title {
+    font-size:20px;
+  }
+  section#options {
+  margin-left:1.5rem;
+  }
+  .ingredients, .appareils, .ustensiles {
+    width: 125px;
+    font-size:14px;
+  }
+  .search-icon-div, .search-icon-div:focus, .search-icon-div:hover {
+    margin-left:-3.1rem;
+    height:50px;
+  }
+  .list-box {
+    width: 125px;
+  height: 250px;
+  }
+  .list-item {
+    font-size:12px;
+  }
+  #list-input-appareils, #list-input-ingredients, #list-input-ustensils {
+    width: 100px;
+  height: 36px;
+  }
+}
+@media screen and (max-width:509px){
+  .ingredients, .appareils, .ustensiles {
+    width: 110px;
+    font-size:12px;
+  }
+  .search-icon-div, .search-icon-div:focus, .search-icon-div:hover {
+    margin-left:-3.1rem;
+    height:54px;
+  }
+  .list-box {
+    width: 110px;
+  height: 250px;
+  }
+  .list-item {
+    font-size:12px;
+  }
+  #list-input-appareils, #list-input-ingredients, #list-input-ustensils {
+    width: 90px;
+  height: 36px;
+  }
+
+}
+
+@media screen and (max-width:390px){
+  #meal {
+    width: 300px;
+    height: 40px;
+  }
+  .search-icon-div, .search-icon-div:focus, .search-icon-div:hover {
+    margin-left:-3.1rem;
+    height:40px;
+  }
+  section#options {
+    margin:1rem;
+  }
+  .options {
+    flex-direction: column;
+  }
+  .ingredients, .appareils, .ustensiles {
+    width: 350px;
+    font-size:19px;
+  }
+  .list-box {
+    width: 350px;
+  height: 250px;
+  }
+  .list-item {
+    font-size:16px;
+  }
+  #list-input-appareils, #list-input-ingredients, #list-input-ustensils {
+    width:100%;
+    height: 36px;
+  }
+  #meals-container {
+    width:100%;
+    margin:1rem;
+  }
+article {
+  width:100%;
+}
 }
