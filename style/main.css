@@ -146,7 +146,6 @@ padding:1rem;
   overflow: hidden;
   display:none;
   border-radius: 0;
-  /* padding-left:1rem; */
 }
 .list-box {
   position:absolute;
@@ -286,7 +285,7 @@ stroke:  #1B1B1B;
     border-top-right-radius: 21px;
   }
   
-  article h3 {
+article h3 {
     color: #000;
     font-family: "Anton";
     font-size: 18px;
@@ -296,8 +295,8 @@ stroke:  #1B1B1B;
     margin:25px;
   }
   
-  article h4 {
-    color:#7A7A7A;
+article h4 {
+color:#7A7A7A;
 font-family: "Manrope";
 font-size: 12px;
 font-style: normal;
@@ -305,8 +304,8 @@ font-weight: 700;
 line-height: normal;
 letter-spacing: 1.08px;
 text-transform: uppercase;
-    margin:25px;
-  }
+margin:25px;
+}
 
   article p {
     color:  #1B1B1B;
@@ -344,9 +343,6 @@ font-weight: 400;
 line-height: normal;
 }
 
-
-
-
 .time-span {
 color:  #1B1B1B;
 text-align: center;
@@ -364,4 +360,137 @@ line-height: normal;
     position:absolute;
     top:26px;
     right:22px;
+}
+
+@media screen and (max-width:1349px) {
+  #meals-container {
+    flex-wrap:wrap;
+  }
+  article h3 {
+    font-size:14px;
+  }
+  article h4 {
+    font-size:12px;
+  }
+  article p {
+    font-size:10px;
+  }
+  article ul li {
+    font-size:10px;
+  }
+  article ul li span {
+    font-size:10px;
+  }
+  .time-span {
+    font-size:10px;
+  }
+}
+
+@media screen and (max-width:1130px) {
+ article {
+    flex: 0 1 calc(50% - 2rem); 
+  }
+  #meal {
+    width: 800px;
+    height: 65px;
+  }
+}
+
+@media screen and (max-width:1020px) {
+  section#options {
+    display:flex;
+    flex-direction: column;
+    align-items:flex-start;
+    gap:2rem;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width:900px){
+  #meal {
+    width: 700px;
+    height: 55px;
+  }
+  .section-title {
+    font-size:34px;
+  }
+  .ingredients, .appareils, .ustensiles {
+    width: 150px;
+    font-size:14px;
+  }
+  .search-icon-div, .search-icon-div:focus, .search-icon-div:hover {
+    margin-left:-3.1rem;
+    height:54px;
+  }
+  .list-box {
+    width: 150px;
+  height: 250px;
+  }
+  .list-item {
+    font-size:12px;
+  }
+  #list-input-appareils, #list-input-ingredients, #list-input-ustensils {
+    width: 120px;
+  height: 36px;
+  }
+}
+
+@media screen and (max-width:753px){
+  #meal {
+    width: 600px;
+    height: 55px;
+  }
+  article {
+    flex: 0 1 calc(100% - 2rem); 
+  }
+  article h3 {
+    font-size:16px;
+  }
+  article h4 {
+    font-size:14px;
+  }
+  article p {
+    font-size:12px;
+  }
+  article ul li {
+    font-size:12px;
+  }
+  article ul li span {
+    font-size:12px;
+  }
+  .time-span {
+    font-size:12px;
+  }
+}
+
+@media screen and (max-width:673px){
+  #meal {
+    width: 600px;
+    height: 55px;
+  }
+  .section-title {
+    font-size:26px;
+  }
+  section#options {
+  margin-left:1.5rem;
+  }
+  .ingredients, .appareils, .ustensiles {
+    width: 140px;
+    font-size:14px;
+  }
+  .search-icon-div, .search-icon-div:focus, .search-icon-div:hover {
+    margin-left:-3.1rem;
+    height:54px;
+  }
+  .list-box {
+    width: 140px;
+  height: 250px;
+  }
+  .list-item {
+    font-size:12px;
+  }
+  #list-input-appareils, #list-input-ingredients, #list-input-ustensils {
+    width: 120px;
+  height: 36px;
+  }
 }
