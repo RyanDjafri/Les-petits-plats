@@ -219,6 +219,9 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 }
+.cancel-input {
+  display:none;
+}
 .selected-options {
   margin:2rem 102px;
   display:flex;
@@ -552,8 +555,13 @@ line-height: normal;
   }
 }
 @media screen and (max-width:509px){
+  .options {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   .ingredients, .appareils, .ustensiles {
-    width: 110px;
+    width: 200px;
     font-size:12px;
   }
   .search-icon-div, .search-icon-div:focus, .search-icon-div:hover {
@@ -561,17 +569,23 @@ line-height: normal;
     height:54px;
   }
   .list-box {
-    width: 110px;
+    width: 200px;
   height: 250px;
   }
   .list-item {
     font-size:12px;
   }
   #list-input-appareils, #list-input-ingredients, #list-input-ustensils {
-    width: 90px;
+    width: 200px;
   height: 36px;
   }
-
+  #meals-container {
+    width:100%;
+    margin:1rem;
+  }
+  article {
+    flex: 0 1 calc(100% - 2rem);
+  }
 }
 
 @media screen and (max-width:390px){

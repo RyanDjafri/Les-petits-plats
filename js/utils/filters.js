@@ -6,28 +6,35 @@ const ustensilsList = document.querySelector("#list-u");
 const recipeNumber = document.getElementById("recipes-number");
 const categories = document.querySelectorAll(".category");
 const lists = document.querySelectorAll(".list");
-const listInputs = document.querySelectorAll("#list-input");
 const selectedContainer = document.querySelector(".selected-options");
 
-// const cancels = document.querySelectorAll(".cancel-input");
+async function handleInputs() {
+  const listInputs = document.querySelectorAll(".search-input");
+  const cancels = document.querySelectorAll(".cancel-input");
 
-// listInputs.forEach((listInput, index) => {
-//   listInput.addEventListener("input", () => {
-//     const cancel = cancels[index];
-//     if (listInput.value.length > 1) {
-//       cancel.style.display = "block";
-//     } else {
-//       cancel.style.display = "none";
-//     }
+  for (let i = 0; i < listInputs.length; i++) {
+    const input = listInputs[i];
+    input.addEventListener("input", () => {
+      if (cancels.length > 0) {
+        for (let j = 0; j < cancels.length; j++) {
+          const cancel = cancels[j];
+          if (input.value.length > 2) {
+            cancel.style.display = "block";
+          } else {
+            cancel.style.display = "none";
+          }
 
-//     if (cancel.style.display === "block") {
-//       cancel.addEventListener("click", () => {
-//         listInput.value = "";
-//         cancel.style.display = "none";
-//       });
-//     }
-//   });
-// });
+          if (cancel.style.display === "block") {
+            cancel.addEventListener("click", () => {
+              input.value = "";
+              cancel.style.display = "none";
+            });
+          }
+        }
+      }
+    });
+  }
+}
 
 async function getData() {
   try {
@@ -85,7 +92,7 @@ async function getAllIngredients() {
       <li class="list-item">${ingredient}</li>
     `;
   }
-
+  await handleInputs();
   const input = document.getElementById("list-input-ingredients");
   const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
 
@@ -141,6 +148,7 @@ async function getAllAppareils() {
     appareilsList.innerHTML += `
     <li class="list-item">${appliance}</li>
     `;
+    await handleInputs();
     const input = document.getElementById("list-input-appareils");
     const appareilsListItems = document.querySelectorAll("#list-a .list-item");
     input.addEventListener("input", (e) => {
@@ -198,6 +206,7 @@ async function getAllUstensils() {
       <li class="list-item">${ustensil}</li>
     `;
   }
+  await handleInputs();
   const input = document.getElementById("list-input-ustensils");
   const ustensilsListItems = document.querySelectorAll("#list-u .list-item");
   input.addEventListener("input", (e) => {

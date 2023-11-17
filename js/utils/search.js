@@ -27,7 +27,7 @@ searchIcon.addEventListener("mouseout", () => {
 searchBar.addEventListener("input", () => {
   const cancel = document.querySelector(".cancel");
   const value = searchBar.value.toLowerCase();
-  if (searchBar.value.length > 1) {
+  if (searchBar.value.length > 2) {
     cancel.style.display = "block";
   } else {
     cancel.style.display = "none";
