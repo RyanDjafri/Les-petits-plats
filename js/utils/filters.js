@@ -28,11 +28,21 @@ async function handleInputs() {
             cancel.addEventListener("click", () => {
               input.value = "";
               cancel.style.display = "none";
+              resetList(input);
             });
           }
         }
       }
     });
+  }
+}
+
+function resetList(input) {
+  const list = input.parentElement.parentElement.querySelector(".list");
+  const listItems = list.querySelectorAll(".list-item");
+
+  for (let i = 0; i < listItems.length; i++) {
+    listItems[i].style.display = "block";
   }
 }
 
