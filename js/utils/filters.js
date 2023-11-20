@@ -1,4 +1,5 @@
 import { fetchData } from "../api/fetchData.js";
+import { mealTemplate } from "../template/mealTemplate.js";
 
 const ingredientsList = document.querySelector("#list-i");
 const appareilsList = document.querySelector("#list-a");
@@ -132,6 +133,8 @@ async function getAllIngredients() {
             <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
           </div>
         `;
+        // getAllSelectedOptions();
+        filterMeals();
       } else {
         console.log(`${selected} is already selected.`);
       }
@@ -161,7 +164,7 @@ async function getAllAppareils() {
     appareilsList.innerHTML += `
     <li class="list-item">${appliance}</li>
     `;
-    await handleInputs();
+
     const input = document.getElementById("list-input-appareils");
     const appareilsListItems = document.querySelectorAll("#list-a .list-item");
     input.addEventListener("input", (e) => {
@@ -187,6 +190,8 @@ async function getAllAppareils() {
               <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
             </div>
           `;
+          filterMeals();
+          // getAllSelectedOptions();
         } else {
           console.log(`${selected} is already selected.`);
         }
@@ -200,6 +205,7 @@ async function getAllAppareils() {
       });
     }
   }
+  await handleInputs();
 }
 
 async function getAllUstensils() {
@@ -219,7 +225,7 @@ async function getAllUstensils() {
       <li class="list-item">${ustensil}</li>
     `;
   }
-  await handleInputs();
+
   const input = document.getElementById("list-input-ustensils");
   const ustensilsListItems = document.querySelectorAll("#list-u .list-item");
   input.addEventListener("input", (e) => {
@@ -245,6 +251,8 @@ async function getAllUstensils() {
             <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
           </div>
         `;
+        // getAllSelectedOptions();
+        filterMeals();
       } else {
         console.log(`${selected} is already selected.`);
       }
@@ -258,54 +266,60 @@ async function getAllUstensils() {
       });
     });
   }
+  await handleInputs();
 }
 
 getAllIngredients();
 getAllAppareils();
 getAllUstensils();
 
-function getAllSelectedOptions() {
+async function getAllSelectedOptions() {
   const selectedItems = selectedContainer.querySelectorAll(".selected");
   const selectedOptions = [];
-  console.log("Selected Items:", selectedItems);
-
-  console.log("Selected Options:", selectedOptions);
-  // return selectedOptions;
+  for (let i = 0; i < selectedItems.length; i++) {
+    const item = selectedItems[i];
+    selectedOptions.push(item.textContent.trim());
+  }
+  return selectedOptions;
 }
 
-getAllSelectedOptions();
+async function filterMeals() {
+  const allMeals = await getData();
+  const selectedOptions = await getAllSelectedOptions();
 
-// async function filterMeals() {
-//   const selectedOptions = getAllSelectedOptions();
-//   const allMeals = await getData();
+  if (selectedOptions.length > 0) {
+    const filteredMeals = allMeals.filter((meal) => {
+      const mealIngredients = meal.ingredients.map((ingredient) =>
+        ingredient.ingredient.toLowerCase()
+      );
+      const mealAppareils = [meal.appliance.toLowerCase()];
+      const mealUstensils = meal.ustensils.map((ustensil) =>
+        ustensil.toLowerCase()
+      );
+      return selectedOptions.every(
+        (option) =>
+          mealIngredients.includes(option.toLowerCase()) ||
+          mealAppareils.includes(option.toLowerCase()) ||
+          mealUstensils.includes(option.toLowerCase())
+      );
+    });
 
-//   if (selectedOptions.length === 0) {
-//     console.log("All meals:", allMeals);
-//   } else {
-//     const filteredMeals = allMeals.filter((meal) => {
-//       const mealIngredients = meal.ingredients.map((ingredient) =>
-//         ingredient.ingredient.toLowerCase()
-//       );
-//       const mealAppareils = [meal.appliance.toLowerCase()];
-//       const mealUstensils = meal.ustensils.map((ustensil) =>
-//         ustensil.toLowerCase()
-//       );
+    console.log("Selected options:", selectedOptions);
+    console.log("Filtered meals based on selected options:", filteredMeals);
 
-//       return (
-//         selectedOptions.some((option) =>
-//           mealIngredients.includes(option.toLowerCase())
-//         ) ||
-//         selectedOptions.some((option) =>
-//           mealAppareils.includes(option.toLowerCase())
-//         ) ||
-//         selectedOptions.some((option) =>
-//           mealUstensils.includes(option.toLowerCase())
-//         )
-//       );
-//     });
+    const mealsContainer = document.getElementById("meals-container");
+    mealsContainer.innerHTML = "";
 
-//     console.log("Filtered meals based on selected options:", filteredMeals);
-//   }
-// }
-
-// filterMeals();
+    for (let i = 0; i < filteredMeals.length; i++) {
+      const meal = filteredMeals[i];
+      const mealModel = mealTemplate(meal);
+      const mealCardDOM = mealModel.getMealCardDOM();
+      mealsContainer.appendChild(mealCardDOM);
+    }
+    recipeNumber.textContent = filteredMeals.length;
+  } else {
+    console.log("No selected options");
+    // If no options are selected, display all meals
+    // displayAllMeals();
+  }
+}

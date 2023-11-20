@@ -5,8 +5,8 @@ async function displayData(data) {
   const mealsSection = document.querySelector("#meals-container");
   data.forEach((meal) => {
     const mealModel = mealTemplate(meal);
-    const userCardDOM = mealModel.getMealCardDOM();
-    mealsSection.appendChild(userCardDOM);
+    const mealCardDOM = mealModel.getMealCardDOM();
+    mealsSection.appendChild(mealCardDOM);
   });
 }
 
