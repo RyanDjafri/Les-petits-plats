@@ -1,5 +1,6 @@
 import { fetchData } from "../api/fetchData.js";
 import { mealTemplate } from "../template/mealTemplate.js";
+import { init } from "../index.js";
 
 const ingredientsList = document.querySelector("#list-i");
 const appareilsList = document.querySelector("#list-a");
@@ -274,11 +275,23 @@ getAllAppareils();
 getAllUstensils();
 
 async function getAllSelectedOptions() {
-  const selectedItems = selectedContainer.querySelectorAll(".selected");
+  const selectedItemsContainer =
+    selectedContainer.querySelectorAll(".selected-item");
   const selectedOptions = [];
-  for (let i = 0; i < selectedItems.length; i++) {
-    const item = selectedItems[i];
+
+  for (let j = 0; j < selectedItemsContainer.length; j++) {
+    const item = selectedItemsContainer[j];
+    const closeIcon = item.querySelector(".close-icon-item");
     selectedOptions.push(item.textContent.trim());
+    closeIcon.addEventListener("click", () => {
+      const index = selectedOptions.indexOf(item.textContent.trim());
+      if (index !== -1) {
+        selectedOptions.splice(index, 1);
+      }
+      console.log("Updated selectedOptions:", selectedOptions);
+      item.remove();
+      filterMeals();
+    });
   }
   return selectedOptions;
 }
@@ -319,7 +332,6 @@ async function filterMeals() {
     recipeNumber.textContent = filteredMeals.length;
   } else {
     console.log("No selected options");
-    // If no options are selected, display all meals
-    // displayAllMeals();
+    init();
   }
 }

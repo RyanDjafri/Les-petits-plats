@@ -3,14 +3,15 @@ import { mealTemplate } from "./template/mealTemplate.js";
 
 async function displayData(data) {
   const mealsSection = document.querySelector("#meals-container");
-  data.forEach((meal) => {
+  for (let i = 0; i < data.length; i++) {
+    const meal = data[i];
     const mealModel = mealTemplate(meal);
     const mealCardDOM = mealModel.getMealCardDOM();
     mealsSection.appendChild(mealCardDOM);
-  });
+  }
 }
 
-async function init() {
+export async function init() {
   const data = await fetchData();
   displayData(data);
 }
