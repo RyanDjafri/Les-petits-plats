@@ -134,7 +134,7 @@ async function getAllIngredients() {
             <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
           </div>
         `;
-        // getAllSelectedOptions();
+
         filterMeals();
       } else {
         console.log(`${selected} is already selected.`);
@@ -192,7 +192,6 @@ async function getAllAppareils() {
             </div>
           `;
           filterMeals();
-          // getAllSelectedOptions();
         } else {
           console.log(`${selected} is already selected.`);
         }
@@ -252,7 +251,7 @@ async function getAllUstensils() {
             <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
           </div>
         `;
-        // getAllSelectedOptions();
+
         filterMeals();
       } else {
         console.log(`${selected} is already selected.`);
