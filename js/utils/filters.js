@@ -229,10 +229,10 @@ async function getAllUstensils() {
   const input = document.getElementById("list-input-ustensils");
   const ustensilsListItems = document.querySelectorAll("#list-u .list-item");
   input.addEventListener("input", (e) => {
-    const value = e.target.value.toLowerCase();
+    const value = e.target.value.toLowerCase().trim();
     for (let j = 0; j < ustensilsListItems.length; j++) {
       const listItem = ustensilsListItems[j];
-      const listItemText = listItem.textContent.toLowerCase();
+      const listItemText = listItem.textContent.toLowerCase().trim();
       if (listItemText.includes(value)) {
         listItem.style.display = "block";
       } else {

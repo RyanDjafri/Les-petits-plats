@@ -1,6 +1,7 @@
 import { fetchData } from "../api/fetchData.js";
 import { mealTemplate } from "../template/mealTemplate.js";
 import { init } from "../index.js";
+
 const searchBar = document.getElementById("meal");
 const searchIcon = document.querySelector(".search-icon-div");
 const icon = document.querySelector(".search-icon");

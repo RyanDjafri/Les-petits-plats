@@ -252,6 +252,7 @@ color:#000000;
 font-family: "Manrope";
 font-size: 14px;
 font-style: normal;
+text-transform: capitalize;
 font-weight: 400;
 line-height: normal;
 }
