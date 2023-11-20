@@ -14,35 +14,36 @@ async function handleInputs() {
 
   for (let i = 0; i < listInputs.length; i++) {
     const input = listInputs[i];
-    input.addEventListener("input", () => {
-      if (cancels.length > 0) {
-        for (let j = 0; j < cancels.length; j++) {
-          const cancel = cancels[j];
-          if (input.value.length > 2) {
-            cancel.style.display = "block";
-          } else {
-            cancel.style.display = "none";
-          }
+    const cancel = cancels[i];
 
-          if (cancel.style.display === "block") {
-            cancel.addEventListener("click", () => {
-              input.value = "";
-              cancel.style.display = "none";
-              resetList(input);
-            });
-          }
-        }
+    input.addEventListener("input", () => {
+      if (input.value.length > 2) {
+        cancel.style.display = "block";
+      } else {
+        cancel.style.display = "none";
+      }
+
+      if (cancel.style.display === "block") {
+        cancel.addEventListener("click", () => {
+          input.value = "";
+          cancel.style.display = "none";
+          resetList(input, cancel);
+        });
       }
     });
   }
 }
 
-function resetList(input) {
-  const list = input.parentElement.parentElement.querySelector(".list");
-  const listItems = list.querySelectorAll(".list-item");
-
-  for (let i = 0; i < listItems.length; i++) {
-    listItems[i].style.display = "block";
+function resetList(input, cancel) {
+  const listContainer = input.parentElement.parentElement;
+  const list = listContainer.querySelectorAll(".list-item");
+  if (list) {
+    for (let i = 0; i < list.length; i++) {
+      list[i].style.display = "block";
+      cancel.style.display = "none";
+    }
+  } else {
+    console.error("List element not found. Input:", list);
   }
 }
 
@@ -65,6 +66,7 @@ for (let i = 0; i < categories.length; i++) {
     const clickedList = lists[i];
     clickedList.classList.toggle("list-box");
     if (clickedList.classList.contains("list-box")) {
+      categories[i].parentElement.style.borderRadius = "11px 11px 0 0";
       category.querySelector(".chevron").src =
         "../../assets/icons/vector-up.svg";
       clickedList.style.display = "block";
@@ -102,7 +104,7 @@ async function getAllIngredients() {
       <li class="list-item">${ingredient}</li>
     `;
   }
-  await handleInputs();
+
   const input = document.getElementById("list-input-ingredients");
   const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
 
@@ -142,6 +144,7 @@ async function getAllIngredients() {
       });
     });
   }
+  await handleInputs();
 }
 
 async function getAllAppareils() {
