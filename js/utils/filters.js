@@ -73,7 +73,7 @@ for (let i = 0; i < categories.length; i++) {
         "../../assets/icons/vector-up.svg";
       clickedList.style.display = "block";
     } else {
-      category.style.borderRadius = "11px";
+      categories[i].parentElement.style.borderRadius = "11px";
       category.querySelector(".chevron").src = "./assets/icons/Vector1.svg";
       clickedList.style.display = "none";
     }
@@ -100,12 +100,12 @@ async function getAllIngredients() {
     return acc;
   }, []);
 
-  for (let i = 0; i < ingredients.length; i++) {
-    const ingredient = ingredients[i];
-    ingredientsList.innerHTML += `
-      <li class="list-item">${ingredient}</li>
-    `;
-  }
+  // for (let i = 0; i < ingredients.length; i++) {
+  //   const ingredient = ingredients[i];
+  //   ingredientsList.innerHTML += `
+  //     <li class="list-item">${ingredient}</li>
+  //   `;
+  // }
 
   const input = document.getElementById("list-input-ingredients");
   const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
