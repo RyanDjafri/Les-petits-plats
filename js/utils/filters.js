@@ -273,7 +273,7 @@ getAllIngredients();
 getAllAppareils();
 getAllUstensils();
 
-async function getAllSelectedOptions() {
+export async function getAllSelectedOptions() {
   const selectedItemsContainer =
     selectedContainer.querySelectorAll(".selected-item");
   const selectedOptions = [];
@@ -295,42 +295,56 @@ async function getAllSelectedOptions() {
   return selectedOptions;
 }
 
-async function filterMeals() {
+const searchBar = document.getElementById("meal");
+
+searchBar.addEventListener("input", () => {
+  filterMeals();
+});
+
+
+
+export async function filterMeals() {
   const allMeals = await getData();
   const selectedOptions = await getAllSelectedOptions();
+  const value = searchBar.value.toLowerCase();
 
-  if (selectedOptions.length > 0) {
-    const filteredMeals = allMeals.filter((meal) => {
-      const mealIngredients = meal.ingredients.map((ingredient) =>
-        ingredient.ingredient.toLowerCase()
-      );
-      const mealAppareils = [meal.appliance.toLowerCase()];
-      const mealUstensils = meal.ustensils.map((ustensil) =>
-        ustensil.toLowerCase()
-      );
-      return selectedOptions.every(
+  const filteredMeals = allMeals.filter((meal) => {
+    const mealName = meal.name.toLowerCase();
+    const mealDescription = meal.description.toLowerCase();
+    const mealIngredients = meal.ingredients.map((ingredient) =>
+      ingredient.ingredient.toLowerCase()
+    );
+    return (
+      (value.length === 0 ||
+        mealName.includes(value) ||
+        mealDescription.includes(value) ||
+        mealIngredients.some((ingredient) => ingredient.includes(value))) &&
+      selectedOptions.every(
         (option) =>
           mealIngredients.includes(option.toLowerCase()) ||
-          mealAppareils.includes(option.toLowerCase()) ||
-          mealUstensils.includes(option.toLowerCase())
-      );
-    });
+          [meal.appliance.toLowerCase()].includes(option.toLowerCase()) ||
+          meal.ustensils
+            .map((ustensil) => ustensil.toLowerCase())
+            .includes(option.toLowerCase())
+      )
+    );
+  });
 
-    console.log("Selected options:", selectedOptions);
-    console.log("Filtered meals based on selected options:", filteredMeals);
+  console.log("Selected options:", selectedOptions);
+  console.log("Filtered meals based on selected options:", filteredMeals);
 
-    const mealsContainer = document.getElementById("meals-container");
-    mealsContainer.innerHTML = "";
+  const mealsContainer = document.getElementById("meals-container");
+  mealsContainer.innerHTML = "";
 
-    for (let i = 0; i < filteredMeals.length; i++) {
-      const meal = filteredMeals[i];
-      const mealModel = mealTemplate(meal);
-      const mealCardDOM = mealModel.getMealCardDOM();
-      mealsContainer.appendChild(mealCardDOM);
-    }
-    recipeNumber.textContent = filteredMeals.length;
-  } else {
-    console.log("No selected options");
+  for (let i = 0; i < filteredMeals.length; i++) {
+    const meal = filteredMeals[i];
+    const mealModel = mealTemplate(meal);
+    const mealCardDOM = mealModel.getMealCardDOM();
+    mealsContainer.appendChild(mealCardDOM);
+  }
+  recipeNumber.textContent = filteredMeals.length;
+
+  if (filteredMeals.length === 0) {
     init();
   }
 }
