@@ -268,7 +268,7 @@ stroke:  #1B1B1B;
     margin: 2rem 102px;
     display: flex;
     flex-wrap: wrap; 
-    gap: 2rem;
+    gap: 2.5rem;
     justify-content: flex-start;
 
 }
