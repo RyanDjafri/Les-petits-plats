@@ -37,7 +37,7 @@ async function handleInputs() {
 }
 
 function resetList(input, cancel) {
-  const listContainer = input.parentElement.parentElement;
+  const listContainer = input.parentElement.parentElement.parentElement;
   const list = listContainer.querySelectorAll(".list-item");
   if (list) {
     for (let i = 0; i < list.length; i++) {
