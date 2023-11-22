@@ -100,12 +100,12 @@ async function getAllIngredients() {
     return acc;
   }, []);
 
-  // for (let i = 0; i < ingredients.length; i++) {
-  //   const ingredient = ingredients[i];
-  //   ingredientsList.innerHTML += `
-  //     <li class="list-item">${ingredient}</li>
-  //   `;
-  // }
+  for (let i = 0; i < ingredients.length; i++) {
+    const ingredient = ingredients[i];
+    ingredientsList.innerHTML += `
+      <li class="list-item">${ingredient}</li>
+    `;
+  }
 
   const input = document.getElementById("list-input-ingredients");
   const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
@@ -301,8 +301,6 @@ searchBar.addEventListener("input", () => {
   filterMeals();
 });
 
-
-
 export async function filterMeals() {
   const allMeals = await getData();
   const selectedOptions = await getAllSelectedOptions();
@@ -348,4 +346,3 @@ export async function filterMeals() {
     init();
   }
 }
-

@@ -269,7 +269,8 @@ stroke:  #1B1B1B;
     display: flex;
     flex-wrap: wrap; 
     gap: 2rem;
-    justify-content: space-between;
+    justify-content: flex-start;
+
 }
   
 article {
