@@ -1,4 +1,4 @@
-// Template de card des repas réutilisable dans tous mon code
+// Template de card des repas réutilisable dans tout mon code
 export function mealTemplate(data) {
   const {
     id,
@@ -11,6 +11,7 @@ export function mealTemplate(data) {
     appliance,
     ustensils,
   } = data;
+
   function getMealCardDOM() {
     const article = document.createElement("article");
     const timeDiv = document.createElement("div");
@@ -21,7 +22,9 @@ export function mealTemplate(data) {
     const p = document.createElement("p");
     const h4Two = document.createElement("h4");
     const ulIngredients = document.createElement("ul");
-    ingredients.forEach((ingredient) => {
+
+    for (let i = 0; i < ingredients.length; i++) {
+      const ingredient = ingredients[i];
       const liIngredient = document.createElement("li");
       const spanQuantity = document.createElement("span");
 
@@ -38,16 +41,19 @@ export function mealTemplate(data) {
       }
 
       ulIngredients.appendChild(liIngredient);
-    });
+    }
+
     const spanDuration = document.createElement("span");
     spanDuration.textContent = time + "min";
     spanDuration.classList.add("time-span");
     timeDiv.appendChild(spanDuration);
+
     img.src = `../../data/images/${image}`;
     h3.textContent = name;
     h4.textContent = "Recette";
     h4Two.textContent = "Ingrédients";
     p.textContent = description;
+
     article.dataset.id = id;
     article.appendChild(img);
     article.appendChild(h3);
@@ -57,7 +63,9 @@ export function mealTemplate(data) {
     article.appendChild(ulIngredients);
     timeDiv.classList.add("time-div");
     article.appendChild(timeDiv);
+
     return article;
   }
+
   return { getMealCardDOM };
 }

@@ -203,13 +203,15 @@ async function getAllAppareils() {
 async function getAllUstensils() {
   const data = await getData();
   const ustensils = data.reduce((acc, recipe) => {
-    recipe.ustensils.forEach((ustensil) => {
+    for (let i = 0; i < recipe.ustensils.length; i++) {
+      const ustensil = recipe.ustensils[i];
       if (!acc.includes(ustensil)) {
         acc.push(ustensil);
       }
-    });
+    }
     return acc;
   }, []);
+
   const selectedUstensils = [];
   for (let i = 0; i < ustensils.length; i++) {
     const ustensil = ustensils[i];
@@ -220,6 +222,7 @@ async function getAllUstensils() {
 
   const input = document.getElementById("list-input-ustensils");
   const ustensilsListItems = document.querySelectorAll("#list-u .list-item");
+
   input.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase().trim();
     for (let j = 0; j < ustensilsListItems.length; j++) {
@@ -232,6 +235,7 @@ async function getAllUstensils() {
       }
     }
   });
+
   for (let k = 0; k < ustensilsListItems.length; k++) {
     ustensilsListItems[k].addEventListener("click", () => {
       const selected = ustensilsListItems[k].textContent;
@@ -243,11 +247,11 @@ async function getAllUstensils() {
             <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
           </div>
         `;
-
         filterMeals();
       } else {
         console.log(`${selected} is already selected.`);
       }
+
       const closeIconItem =
         selectedContainer.lastElementChild.querySelector(".close-icon-item");
       closeIconItem.addEventListener("click", () => {
@@ -258,6 +262,7 @@ async function getAllUstensils() {
       });
     });
   }
+
   await handleInputs();
 }
 
