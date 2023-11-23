@@ -1,6 +1,7 @@
 // importation des fonctions nécessaires fetch, template des repas
 import { fetchData } from "../api/fetchData.js";
 import { mealTemplate } from "../template/mealTemplate.js";
+
 // constantes pour la page
 const ingredientsList = document.querySelector("#list-i");
 const appareilsList = document.querySelector("#list-a");
@@ -9,13 +10,13 @@ const recipeNumber = document.getElementById("recipes-number");
 const categories = document.querySelectorAll(".category");
 const lists = document.querySelectorAll(".list");
 const selectedContainer = document.querySelector(".selected-options");
+
 // fonction gérant mes inputs d'options de recherches
 async function handleInputs() {
   const listInputs = document.querySelectorAll(".search-input");
   const cancels = document.querySelectorAll(".cancel-input");
 
-  for (let i = 0; i < listInputs.length; i++) {
-    const input = listInputs[i];
+  listInputs.forEach((input, i) => {
     const cancel = cancels[i];
 
     input.addEventListener("input", () => {
@@ -33,17 +34,18 @@ async function handleInputs() {
         });
       }
     });
-  }
+  });
 }
+
 // fonction permettant la réinitialisation des inputs de recherches(appareils, ingredients, ustensiles)
 function resetList(input, cancel) {
   const listContainer = input.parentElement.parentElement.parentElement;
   const list = listContainer.querySelectorAll(".list-item");
   if (list) {
-    for (let i = 0; i < list.length; i++) {
-      list[i].style.display = "block";
+    list.forEach((item) => {
+      item.style.display = "block";
       cancel.style.display = "none";
-    }
+    });
   } else {
     console.error("List element not found. Input:", list);
   }
@@ -62,8 +64,7 @@ async function getData() {
 
 getData();
 
-for (let i = 0; i < categories.length; i++) {
-  const category = categories[i];
+categories.forEach((category, i) => {
   category.addEventListener("click", () => {
     const clickedList = lists[i];
     clickedList.classList.toggle("list-box");
@@ -78,24 +79,25 @@ for (let i = 0; i < categories.length; i++) {
       clickedList.style.display = "none";
     }
   });
-}
-// affichage des ingredients, event listener pour ajouter dans la liste des options sélectionés
+});
+
+// affichage des ingredients, event listener pour ajouter dans la liste des options sélectionnés
 async function getAllIngredients() {
   const data = await getData();
   const selectedIngredients = [];
   const ingredients = data.reduce((acc, recipe) => {
-    for (let i = 0; i < recipe.ingredients.length; i++) {
-      const ingredient = recipe.ingredients[i].ingredient;
+    recipe.ingredients.forEach((ingredient) => {
+      const { ingredient: currentIngredient } = ingredient;
       if (
-        !acc.includes(ingredient) &&
-        !selectedIngredients.includes(ingredient)
+        !acc.includes(currentIngredient) &&
+        !selectedIngredients.includes(currentIngredient)
       ) {
-        acc.push(ingredient);
+        acc.push(currentIngredient);
         ingredientsList.innerHTML += `
-          <li class="list-item">${ingredient}</li>
+          <li class="list-item">${currentIngredient}</li>
         `;
       }
-    }
+    });
     return acc;
   }, []);
 
@@ -104,20 +106,15 @@ async function getAllIngredients() {
 
   input.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase();
-    for (let j = 0; j < ingredientsListItems.length; j++) {
-      const listItem = ingredientsListItems[j];
+    ingredientsListItems.forEach((listItem) => {
       const listItemText = listItem.textContent.toLowerCase();
-      if (listItemText.includes(value)) {
-        listItem.style.display = "block";
-      } else {
-        listItem.style.display = "none";
-      }
-    }
+      listItem.style.display = listItemText.includes(value) ? "block" : "none";
+    });
   });
 
-  for (let k = 0; k < ingredientsListItems.length; k++) {
-    ingredientsListItems[k].addEventListener("click", () => {
-      const selected = ingredientsListItems[k].textContent;
+  ingredientsListItems.forEach((listItem) => {
+    listItem.addEventListener("click", () => {
+      const selected = listItem.textContent;
       if (!selectedIngredients.includes(selected)) {
         selectedIngredients.push(selected);
         selectedContainer.innerHTML += `
@@ -126,7 +123,6 @@ async function getAllIngredients() {
             <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
           </div>
         `;
-
         filterMeals();
       } else {
         console.log(`${selected} is already selected.`);
@@ -139,10 +135,11 @@ async function getAllIngredients() {
         selectedIngredients.splice(index, 1);
       });
     });
-  }
+  });
   await handleInputs();
 }
-// affichage des appareils, event listener pour ajouter dans la liste des options sélectionés
+
+// affichage des appareils, event listener pour ajouter dans la liste des options sélectionnés
 async function getAllAppareils() {
   const data = await getData();
   const appliances = data.reduce((acc, recipe) => {
@@ -152,8 +149,7 @@ async function getAllAppareils() {
     return acc;
   }, []);
   const selectedAppareils = [];
-  for (let i = 0; i < appliances.length; i++) {
-    const appliance = appliances[i];
+  appliances.forEach((appliance) => {
     appareilsList.innerHTML += `
     <li class="list-item">${appliance}</li>
     `;
@@ -162,19 +158,17 @@ async function getAllAppareils() {
     const appareilsListItems = document.querySelectorAll("#list-a .list-item");
     input.addEventListener("input", (e) => {
       const value = e.target.value.toLowerCase();
-      for (let j = 0; j < appareilsListItems.length; j++) {
-        const listItem = appareilsListItems[j];
+      appareilsListItems.forEach((listItem) => {
         const listItemText = listItem.textContent.toLowerCase();
-        if (listItemText.includes(value)) {
-          listItem.style.display = "block";
-        } else {
-          listItem.style.display = "none";
-        }
-      }
+        listItem.style.display = listItemText.includes(value)
+          ? "block"
+          : "none";
+      });
     });
-    for (let k = 0; k < appareilsListItems.length; k++) {
-      appareilsListItems[k].addEventListener("click", () => {
-        const selected = appareilsListItems[k].textContent;
+
+    appareilsListItems.forEach((listItem) => {
+      listItem.addEventListener("click", () => {
+        const selected = listItem.textContent;
         if (!selectedAppareils.includes(selected)) {
           selectedAppareils.push(selected);
           selectedContainer.innerHTML += `
@@ -195,11 +189,12 @@ async function getAllAppareils() {
           selectedAppareils.splice(index, 1);
         });
       });
-    }
-  }
+    });
+  });
   await handleInputs();
 }
-// affichage des ustensiles, event listener pour ajouter dans la liste des options sélectionés
+
+// affichage des ustensiles, event listener pour ajouter dans la liste des options sélectionnés
 async function getAllUstensils() {
   const data = await getData();
   const ustensils = data.reduce((acc, recipe) => {
@@ -211,30 +206,25 @@ async function getAllUstensils() {
     return acc;
   }, []);
   const selectedUstensils = [];
-  for (let i = 0; i < ustensils.length; i++) {
-    const ustensil = ustensils[i];
+  ustensils.forEach((ustensil) => {
     ustensilsList.innerHTML += `
       <li class="list-item">${ustensil}</li>
     `;
-  }
+  });
 
   const input = document.getElementById("list-input-ustensils");
   const ustensilsListItems = document.querySelectorAll("#list-u .list-item");
   input.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase().trim();
-    for (let j = 0; j < ustensilsListItems.length; j++) {
-      const listItem = ustensilsListItems[j];
+    ustensilsListItems.forEach((listItem) => {
       const listItemText = listItem.textContent.toLowerCase().trim();
-      if (listItemText.includes(value)) {
-        listItem.style.display = "block";
-      } else {
-        listItem.style.display = "none";
-      }
-    }
+      listItem.style.display = listItemText.includes(value) ? "block" : "none";
+    });
   });
-  for (let k = 0; k < ustensilsListItems.length; k++) {
-    ustensilsListItems[k].addEventListener("click", () => {
-      const selected = ustensilsListItems[k].textContent;
+
+  ustensilsListItems.forEach((listItem) => {
+    listItem.addEventListener("click", () => {
+      const selected = listItem.textContent;
       if (!selectedUstensils.includes(selected)) {
         selectedUstensils.push(selected);
         selectedContainer.innerHTML += `
@@ -243,7 +233,6 @@ async function getAllUstensils() {
             <img src="../../assets/icons/close-item.svg" alt="close-icon" class="close-icon-item"/>
           </div>
         `;
-
         filterMeals();
       } else {
         console.log(`${selected} is already selected.`);
@@ -257,21 +246,21 @@ async function getAllUstensils() {
         selectedUstensils.splice(index, 1);
       });
     });
-  }
+  });
   await handleInputs();
 }
 
 getAllIngredients();
 getAllAppareils();
 getAllUstensils();
+
 // fonction récupérant toutes les options sélectionnées (ingredients, appareils, ustensiles)
 export async function getAllSelectedOptions() {
   const selectedItemsContainer =
     selectedContainer.querySelectorAll(".selected-item");
   const selectedOptions = [];
 
-  for (let j = 0; j < selectedItemsContainer.length; j++) {
-    const item = selectedItemsContainer[j];
+  selectedItemsContainer.forEach((item) => {
     const closeIcon = item.querySelector(".close-icon-item");
     selectedOptions.push(item.textContent.trim());
     closeIcon.addEventListener("click", () => {
@@ -283,7 +272,7 @@ export async function getAllSelectedOptions() {
       item.remove();
       filterMeals();
     });
-  }
+  });
   return selectedOptions;
 }
 
@@ -292,6 +281,7 @@ const searchBar = document.getElementById("meal");
 searchBar.addEventListener("input", () => {
   filterMeals();
 });
+
 // fonction filtrant les repas grâce à l'input ou les options sélectionnés
 export async function filterMeals() {
   const allMeals = await getData();
@@ -326,11 +316,10 @@ export async function filterMeals() {
   const mealsContainer = document.getElementById("meals-container");
   mealsContainer.innerHTML = "";
 
-  for (let i = 0; i < filteredMeals.length; i++) {
-    const meal = filteredMeals[i];
+  filteredMeals.forEach((meal) => {
     const mealModel = mealTemplate(meal);
     const mealCardDOM = mealModel.getMealCardDOM();
     mealsContainer.appendChild(mealCardDOM);
-  }
+  });
   recipeNumber.textContent = filteredMeals.length;
 }
