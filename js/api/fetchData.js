@@ -1,3 +1,4 @@
+// fonction de fetch de ma data(repas)
 export async function fetchData() {
   try {
     const response = await fetch("../../data/recipes.json");
@@ -10,6 +11,6 @@ export async function fetchData() {
     return data;
   } catch (error) {
     console.error("Error fetching or processing data:", error);
-    throw error; // Rethrow the error to indicate a failure
+    throw error;
   }
 }

@@ -1,5 +1,6 @@
+// importation de ma fonction filtrant les repas
 import { filterMeals } from "./filters.js";
-
+// les constantes nécessaires pour les fonctionnalités DOM
 const searchBar = document.getElementById("meal");
 const searchIcon = document.querySelector(".search-icon-div");
 const icon = document.querySelector(".search-icon");
@@ -28,4 +29,4 @@ searchBar.addEventListener("input", async () => {
     });
   }
 });
-
+// Event Listeners sur mes élements du DOM pour animer ma page et permettre le trie des repas

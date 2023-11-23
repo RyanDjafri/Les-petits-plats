@@ -1,7 +1,7 @@
+// importation des fonctions nécessaires fetch, template des repas
 import { fetchData } from "../api/fetchData.js";
 import { mealTemplate } from "../template/mealTemplate.js";
-import { init } from "../index.js";
-
+// constantes pour la page
 const ingredientsList = document.querySelector("#list-i");
 const appareilsList = document.querySelector("#list-a");
 const ustensilsList = document.querySelector("#list-u");
@@ -9,7 +9,7 @@ const recipeNumber = document.getElementById("recipes-number");
 const categories = document.querySelectorAll(".category");
 const lists = document.querySelectorAll(".list");
 const selectedContainer = document.querySelector(".selected-options");
-
+// fonction gérant mes inputs d'options de recherches
 async function handleInputs() {
   const listInputs = document.querySelectorAll(".search-input");
   const cancels = document.querySelectorAll(".cancel-input");
@@ -35,7 +35,7 @@ async function handleInputs() {
     });
   }
 }
-
+// fonction permettant la réinitialisation des inputs de recherches(appareils, ingredients, ustensiles)
 function resetList(input, cancel) {
   const listContainer = input.parentElement.parentElement.parentElement;
   const list = listContainer.querySelectorAll(".list-item");
@@ -79,11 +79,10 @@ for (let i = 0; i < categories.length; i++) {
     }
   });
 }
-
+// affichage des ingredients, event listener pour ajouter dans la liste des options sélectionés
 async function getAllIngredients() {
   const data = await getData();
   const selectedIngredients = [];
-
   const ingredients = data.reduce((acc, recipe) => {
     for (let i = 0; i < recipe.ingredients.length; i++) {
       const ingredient = recipe.ingredients[i].ingredient;
@@ -99,13 +98,6 @@ async function getAllIngredients() {
     }
     return acc;
   }, []);
-
-  for (let i = 0; i < ingredients.length; i++) {
-    const ingredient = ingredients[i];
-    ingredientsList.innerHTML += `
-      <li class="list-item">${ingredient}</li>
-    `;
-  }
 
   const input = document.getElementById("list-input-ingredients");
   const ingredientsListItems = document.querySelectorAll("#list-i .list-item");
@@ -150,7 +142,7 @@ async function getAllIngredients() {
   }
   await handleInputs();
 }
-
+// affichage des appareils, event listener pour ajouter dans la liste des options sélectionés
 async function getAllAppareils() {
   const data = await getData();
   const appliances = data.reduce((acc, recipe) => {
@@ -207,7 +199,7 @@ async function getAllAppareils() {
   }
   await handleInputs();
 }
-
+// affichage des ustensiles, event listener pour ajouter dans la liste des options sélectionés
 async function getAllUstensils() {
   const data = await getData();
   const ustensils = data.reduce((acc, recipe) => {
@@ -272,7 +264,7 @@ async function getAllUstensils() {
 getAllIngredients();
 getAllAppareils();
 getAllUstensils();
-
+// fonction récupérant toutes les options sélectionnées (ingredients, appareils, ustensiles)
 export async function getAllSelectedOptions() {
   const selectedItemsContainer =
     selectedContainer.querySelectorAll(".selected-item");
@@ -300,7 +292,7 @@ const searchBar = document.getElementById("meal");
 searchBar.addEventListener("input", () => {
   filterMeals();
 });
-
+// fonction filtrant les repas grâce à l'input ou les options sélectionnés
 export async function filterMeals() {
   const allMeals = await getData();
   const selectedOptions = await getAllSelectedOptions();
@@ -341,8 +333,4 @@ export async function filterMeals() {
     mealsContainer.appendChild(mealCardDOM);
   }
   recipeNumber.textContent = filteredMeals.length;
-
-  if (filteredMeals.length === 0) {
-    init();
-  }
 }

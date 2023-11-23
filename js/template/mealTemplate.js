@@ -1,3 +1,4 @@
+// Template de card des repas réutilisable dans tous mon code
 export function mealTemplate(data) {
   const {
     id,
